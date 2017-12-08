@@ -1,0 +1,165 @@
+<!--
+  ~ MIT License
+  ~
+  ~ Copyright (c) 2017 Kabuku Inc.
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~ SOFTWARE.
+  ~
+  -->
+
+<html>
+    <head>
+        <title>Zero check</title>
+        <meta charset=UTF-8>
+        <meta
+                name=viewport
+                content=width=device-width>
+        <style type=text/css>
+body {
+margin: 0px;
+backgound-color: #FFFFFF;
+font-family: helvetica, arial;
+font-size: 100%;
+color: #555555;
+}
+td {
+text-align: center;
+}
+span {
+font-family: helvetica, arial;
+font-size: 80%;
+color: #777777;
+}
+button {
+width: 40%;
+font-family: helvetica, arial;
+font-size: 90%;
+color: #555555;
+background: #BFDFFF;
+padding: 5px 5px 5px 5px;
+border: none;
+}
+
+
+
+        </style>
+    </head>
+    <body>
+        <br>
+        <table
+                width=100%
+                height=90%>
+            <tr>
+                <td width=50%>
+                    <button
+                            type=button
+                            style=background:#FFE599
+                            onclick=controlServo(4,45)>D16
+                    </button>
+                </td>
+                <td width=50%>
+                    <button
+                            type=button
+                            style=background:#FFE599
+                            onclick=controlServo(0,135)>D14
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button
+                            type=button
+                            onclick=controlServo(5,135)>D05
+                    </button>
+                </td>
+                <td>
+                    <button
+                            type=button
+                            onclick=controlServo(1,45)>D12
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button
+                            type=button
+                            onclick=controlServo(6,45)>D04
+                    </button>
+                </td>
+                <td>
+                    <button
+                            type=button
+                            onclick=controlServo(2,135)>D13
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button
+                            type=button
+                            style=background:#FFE599
+                            onclick=controlServo(7,135)>D02
+                    </button>
+                </td>
+                <td>
+                    <button
+                            type=button
+                            style=background:#FFE599
+                            onclick=controlServo(3,45)>D15
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td colspan=2>
+                    <button
+                            type=button
+                            style=background:#FFBFBF
+                            onclick=controlPm(100)>ZERO Postition
+                    </button>
+                </td>
+            </tr>
+        </table>
+        <div id=demo></div>
+    </body>
+    <script>
+        function controlServo(id, value) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (xhttp.readyState == 4 && xhttp.status == 200) {
+                    document.getElementById("demo").innerHTML = xhttp.responseText;
+                }
+            };
+            xhttp.open("GET", "controller?servo="+id+"&value="+value, true);
+            xhttp.send();
+        }
+        function controlPm(value) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (xhttp.readyState == 4 && xhttp.status == 200) {
+                    document.getElementById("demo").innerHTML = xhttp.responseText;
+                }
+            };
+            xhttp.open("GET", "controller?pm="+value, true);
+            xhttp.send();
+        }
+
+
+
+    </script>
+</html>
